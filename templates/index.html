@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block title %}Home - Maize Inventory System{% endblock %}
+
+{% block content %}
+<div id="sidebar" class="sidebar">
+    
+    <br>
+
+    <div>
+        <h1>Welcome to the Maize Inventory System</h1>
+    <p>Explore the maize planting areas and predictions on the map below.</p>
+    <br>
+    <h2>Navigation</h2>
+    <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('data_upload') }}">Data Upload</a></li>
+    <li><a href="{{ url_for('predictions') }}">Predictions</a></li>
+    <li><a href="{{ url_for('reports') }}">Reports</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+</ul>
+    </div>
+</div>
+
+<div id="main-content" class="main-content">
+    <!-- <h1>Welcome to the Maize Inventory System</h1>
+    <p>Explore the maize planting areas and predictions on the map below.</p> -->
+
+    <!-- Map container -->
+    <div id="map" style="width: 100%; height: 500px"></div>
+</div>
+
+<button id="toggle-sidebar" class="toggle-sidebar" style="color: red;">Toggle Sidebar</button>
+
+<script>
+    // Define multiple base layers
+    var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    });
+
+    var satellite = L.tileLayer(
+        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        {
+            attribution: "Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA",
+        }
+    );
+
+    var topo = L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+        attribution: 'Map data: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> contributors',
+    });
+
+    // Create a map instance with a default base map
+    var map = L.map("map", {
+        center: [-4.163642612358409, 39.527103129166754],
+        zoom: 11,
+        layers: [osm], // Default layer
+    });
+
+    // Marker for a specific location
+    L.marker([-4.163642612358409, 39.527103129166754])
+        .addTo(map)
+        .bindPopup("Study area")
+        .openPopup();
+
+    // Define base maps and overlay layers
+    var baseMaps = {
+        OpenStreetMap: osm,
+        Satellite: satellite,
+        Topographic: topo,
+    };
+
+    // Add layer control to the map (for switching between base maps)
+    L.control.layers(baseMaps).addTo(map);
+
+    // Toggle sidebar functionality
+    const toggleSidebar = document.getElementById("toggle-sidebar");
+    const sidebar = document.getElementById("sidebar");
+    const mainContent = document.getElementById("main-content");
+
+    toggleSidebar.addEventListener("click", function() {
+        sidebar.classList.toggle("collapsed");
+        mainContent.classList.toggle("expanded");
+    });
+</script>
+
+<style>
+    /* Sidebar Styles */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        background-color: #004d4d;
+        color: white;
+        padding: 15px;
+        transition: transform 0.3s ease;
+        z-index: 100;
+    }
+
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+    }
+
+    .main-content {
+        margin-left: 250px;
+        padding: 20px;
+        transition: margin-left 0.3s ease;
+    }
+
+    .main-content.expanded {
+        margin-left: 0;
+    }
+
+    /* Toggle button styles */
+    .toggle-sidebar {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 110;
+        padding: 10px 15px;
+        background-color: #00014d;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .toggle-sidebar:hover {
+        background-color: #009999;
+    }
+</style>
+{% endblock %}

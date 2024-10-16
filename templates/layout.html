@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Maize Inventory System{% endblock %}</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-sidebar-v2/3.1.0/leaflet-sidebar.min.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-sidebar-v2/3.1.0/leaflet-sidebar.min.js"></script>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            font-family: 'Helvetica', sans-serif;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Title Styles */
+        .title {
+            background-color: #004d4d; /* Same as nav background */
+            color: white;
+            text-align: center;
+            margin: 0; /* Remove default margin */
+            padding: 10px 0; /* Reduced padding for smaller size */
+            font-size: 2em; /* Reduced font size */
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: #004d4d;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        nav ul li {
+            position: relative;
+        }
+        nav ul li a {
+            display: block;
+            padding: 14px 20px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #009999;
+            transform: translateY(-2px);
+        }
+
+        /* Add a hover underline animation */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            background: white;
+            transition: width .3s;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        nav ul li a:hover::after {
+            width: 80%;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul li a {
+                padding: 10px;
+                border-bottom: 1px solid #007373;
+            }
+            nav ul li a:hover {
+                background-color: #008080;
+                transform: none;
+            }
+        }
+
+        /* Container for page-specific content */
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #004d4d;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Heading -->
+    <h1 class="title">Maize Inventory System</h1>
+
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('data_upload') }}">Data Upload</a></li>
+            <li><a href="{{ url_for('predictions') }}">Predictions</a></li>
+            <li><a href="{{ url_for('reports') }}">Reports</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        {% block content %}
+        <!-- Content from specific pages will go here -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; {{ current_year }} Maize Inventory System. All rights reserved.</p>
+        <p>Contact: <a href="mailto:info@maizeinventory.com" style="color: white;">info@maizeinventory.com</a></p>
+    </footer>
+
+</body>
+</html>

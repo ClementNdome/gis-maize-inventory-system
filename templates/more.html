@@ -1,0 +1,120 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maize Inventory System</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-sidebar-v2/3.1.0/leaflet-sidebar.min.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-sidebar-v2/3.1.0/leaflet-sidebar.min.js"></script>
+    <style>
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            float: left;
+        }
+        nav ul li.right {
+            float: right;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #111;
+        }
+        #content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/data-upload">Data Upload</a></li>
+            <li><a href="/predictions">Predictions</a></li>
+            <li><a href="/reports">Reports</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div id="map" style="width: 75%; height: 100vh; float: right;"></div>
+    <script>
+        // Define multiple base layers
+        var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        });
+    
+        var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, USGS, NOAA'
+    });
+    
+        var topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> contributors'
+        });
+    
+        // Create a map instance with a default base map
+        var map = L.map("map", {
+            center: [-4.163642612358409, 39.527103129166754],
+            zoom: 11,
+            layers: [osm]  // Default layer
+        });
+    
+        // Marker for a specific location
+        L.marker([-4.163642612358409, 39.527103129166754])
+            .addTo(map)
+            .bindPopup("Study area")
+            .openPopup();
+    
+        // Define base maps and overlay layers
+        var baseMaps = {
+            "OpenStreetMap": osm,
+            "Satellite": satellite,
+            "Topographic": topo
+        };
+    
+        // Add layer control to the map (for switching between base maps)
+        L.control.layers(baseMaps).addTo(map);
+    </script>
+    
+</body>
+</html> -->
+{% extends "layout.html" %}
+
+{% block title %}Home - Maize Inventory System{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Maize Inventory System</h1>
+<p>Explore the maize planting areas and predictions on the map below.</p>
+
+<!-- Map container -->
+<div id="map" style="width: 100%; height: 500px;"></div>
+
+<script>
+    var map = L.map("map").setView([-4.183333, 39.450000], 13);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    L.marker([-4.157, 39.458])
+        .addTo(map)
+        .bindPopup("Study area")
+        .openPopup();
+</script>
+{% endblock %}

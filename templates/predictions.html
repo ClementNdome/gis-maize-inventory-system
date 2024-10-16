@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Predictions</h1>
+<form action="/predict" method="post">
+    <label for="location">Location:</label>
+    <input type="text" name="location" id="location" required><br>
+
+    <label for="season">Season:</label>
+    <input type="text" name="season" id="season" required><br>
+
+    <label for="maize_variety">Maize Variety:</label>
+    <input type="text" name="maize_variety" id="maize_variety"><br>
+
+    <button type="submit">Get Prediction</button>
+</form>
+{% endblock %}
