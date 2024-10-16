@@ -1,0 +1,26 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+
+# Ignore environment variables file
+.env
+
+# Ignore the configuration file that holds credentials
+config.py
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore any compiled files
+*.pyc
+*.pyo
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore IDE or editor specific files
+.idea/
+.vscode/
+*.sublime-workspace
