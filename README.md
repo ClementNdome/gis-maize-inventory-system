@@ -1,15 +1,57 @@
-# Maize Variety Advisor
+# Crop Inventory & Maize Yield Prediction System
 
-This is a machine learning-based application designed to advise local farmers on the best maize varieties to plant based on climatic conditions. The goal is to help farmers make data-driven decisions to optimize their yield and adapt to varying environmental conditions.
+## Overview
+This project leverages remote sensing data, local agricultural records, and machine learning techniques to predict maize yield with high accuracy. It integrates spatial data analysis with predictive modeling to support farmers and policymakers in making data-driven agricultural decisions.
 
 ## Features
-- **Climatic Data**: Farmers can make use of global and  local weather data (temperature, rainfall, etc.) for more accurate predictions.
-- **Maize Variety Suggestions**: The system recommends maize varieties suitable for the given climatic conditions.
-- **Data Visualization**: Interactive graphs and maps to show trends and suggestions.
-- **Machine Learning**: The model is trained on historical climatic and agricultural data to provide personalized advice.
+- Uses remote sensing data and vegetation indices.
+- Implements machine learning models for yield prediction.
+- Visualizes crop inventory and yield predictions on an interactive WebGIS.
+- Provides insights on soil health and climatic factors influencing yield.
 
-## Technology Stack
-- **Backend**: Flask, Python
-- **Machine Learning**: Scikit-learn, Pandas, NumPy
-- **Frontend**: Leaflet.js for mapping
-- **Database**: PostgreSQL with PostGIS for spatial data
+## Technologies Used
+- Python (Flask, Pandas, NumPy, Scikit-learn, TensorFlow)
+- Google Earth Engine (for remote sensing data)
+- Flask (for WebGIS visualization)
+- PostgreSQL/PostGIS (for spatial database management)
+- Leaflet.js (for interactive maps)
+
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ClementNdome/gis-maize-inventory-system.git
+   cd gis-maize-inventory-system
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use: venv\Scripts\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the application:
+   ```bash
+   python main.py
+   ```
+5. Open a web browser and go to `http://localhost:5000`.
+
+## Usage
+- Upload satellite imagery or input agricultural data.
+- Run machine learning models to generate yield predictions.
+- View results on an interactive map.
+- Export reports for further analysis.
+
+## Deployment
+This project can be deployed using:
+- Docker for containerized deployment.
+- AWS/GCP for cloud-based processing.
+- Render, Heroku, or DigitalOcean for web hosting.
+
+## License
+This project is licensed under the MIT License.
+
+## Author
+[Clement Ndome](https://github.com/ClementNdome)
+
